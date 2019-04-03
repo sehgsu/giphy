@@ -1,0 +1,9 @@
+body {
+    background: url(./images/got-bg-img.jpg);
+    background-size: 100%;
+}
+.container {
+    background:rgba(255,255,255,0.75);
+    margin: 50px;
+    padding: 47px;
+}
