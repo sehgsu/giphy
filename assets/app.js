@@ -4,7 +4,7 @@ function genButtons(){
     $("#btn-view").empty();
     for (var i = 0; i < characters.length; i++) {
         var b = $("<button>");
-        b.addClass("char-btn btn-dark");
+        b.addClass("char-btn btn-dark text-center");
         b.attr("data-name", characters[i]);
         b.text(characters[i]);
         b.appendTo("#btn-view");
@@ -32,16 +32,16 @@ $(document).on("click", ".char-btn", function () {
         var results = response.data;
         for (var i = 0; i < results.length; i++) {
             var gifDiv = $("<div>");
-            gifDiv.addClass("newGifs");
+            gifDiv.addClass("newGifs" );
             var rate = $("<p>").text("Rated: " + results[i].rating);
             gifDiv.append(rate);
             var charImg = $("<img>");
             charImg.addClass("gif");
             charImg.attr("alt", "character image");
-            charImg.attr("src", results[i].images.fixed_height.url);
+            charImg.attr("src", results[i].images.fixed_height_still.url);
+            charImg.attr("data-state", "still");
             charImg.attr("data-still", results[i].images.fixed_height_still.url);
             charImg.attr("data-animate", results[i].images.fixed_height.url);
-            charImg.attr("data-state", "still");
             gifDiv.append(charImg);
             $("#gifs").prepend(gifDiv);
 
@@ -50,5 +50,18 @@ $(document).on("click", ".char-btn", function () {
     
     })
 })
+
+$(".gif").on("click", function (){
+var state = $(this).attr("datat-state");
+if (state === "still") {
+    $(this).attr("src", $(this).attr("data-animate"));
+    $(this).attr("data-state", "animate");
+} else {
+    $(this).attr("src", $(this).attr("data-still"));
+    $(this).attr("data-state", "still");
+
+}
+}
+)
 
 genButtons();
